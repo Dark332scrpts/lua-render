@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lua Generator</title>
+<style>
+body {
+  background: #111;
+  color: white;
+  text-align: center;
+  font-family: Arial;
+}
+textarea {
+  width: 90%;
+  height: 200px;
+}
+button {
+  padding: 10px;
+  margin-top: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>Gerador de Link Lua</h2>
+
+<textarea id="script" placeholder="Cole seu script aqui"></textarea>
+<br><br>
+
+<button onclick="gerar()">Gerar Link</button>
+
+<p id="resultado"></p>
+
+<script>
+async function gerar() {
+  const script = document.getElementById("script").value;
+
+  const res = await fetch("/gerar", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ script })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("resultado").innerText =
+    window.location.origin + data.link;
+}
+</script>
+
+</body>
+</html>
