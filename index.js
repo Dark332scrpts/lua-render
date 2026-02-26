@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 
 app.use(express.json());
+app.use(express.static("public"));
 
 let scripts = {};
 
@@ -39,4 +40,4 @@ app.get("/script/:id", (req, res) => {
   res.send(script);
 });
 
-app.listen(process.env.PORT || 10000);
+app.listen(process.env.PORT);
